@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Addproduct.css";
-// Optional: style for the form
+
 export default function AddProductForm({ onAdd }) {
   const [form, setForm] = useState({
     name: "",

@@ -9,11 +9,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/productdb";
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 
-// Mongoose Schema and Model
+
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
@@ -23,9 +23,7 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model("Product", productSchema);
 
-// Routes
-
-// GET /api/products - Fetch all products, sorted by price
+//
 app.get("/api/products", async (req, res) => {
   try {
     const products = await Product.find().sort({ price: 1 });
@@ -46,7 +44,7 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
-// DELETE /api/products/:id - Delete product by ID
+
 app.delete("/api/products/:id", async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
@@ -56,7 +54,7 @@ app.delete("/api/products/:id", async (req, res) => {
   }
 });
 
-// MongoDB connection and server start
+
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
